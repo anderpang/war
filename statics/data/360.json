@@ -1,0 +1,176 @@
+{
+  "静海寺正门": {
+    "name": "静海寺正门",
+    "one": true,
+    "path": "01.jpg",
+    "thumbnail": "01-thumbnail.jpg",
+    "intro": {
+      "path": "01-intro.png",
+      "width": 716,
+      "height": 135
+    },
+    "links": [
+      "静海寺正门",
+      "寺内",
+      "英军入侵",
+      "城下之盟",
+      "丧权辱国",
+      "香港回归"
+    ]
+  },
+  "寺内": {
+    "name": "寺内",
+    "one": true,
+    "path": "02.jpg",
+    "thumbnail": "02-thumbnail.jpg",
+    "links": [
+      "静海寺正门",
+      "寺内",
+      "英军入侵",
+      "城下之盟",
+      "丧权辱国",
+      "香港回归"
+    ]
+  },
+  "英军入侵": {
+    "name": "英军入侵",
+    "one": true,
+    "path": "03.jpg",
+    "thumbnail": "03-thumbnail.jpg",
+    "intro": {
+      "path": "03-intro.png",
+      "width": 716,
+      "height": 239
+    }
+  },
+  "城下之盟": {
+    "name": "城下之盟",
+    "one": true,
+    "path": "04.jpg",
+    "thumbnail": "04-thumbnail.jpg",
+    "intro": {
+      "path": "04-intro.png",
+      "width": 716,
+      "height": 213
+    },
+    "links": [
+      "城下之盟",
+      "模拟议约"
+    ],
+    "triggers": [
+      {
+        "position": {
+          "x": 255.829,
+          "y": 6260.955,
+          "z": -166.685
+        },
+        "intro": {
+          "path": "05.png",
+          "width": 716,
+          "height": 316
+        }
+      }
+    ]
+  },
+  "模拟议约": {
+    "name": "模拟议约",
+    "one": true,
+    "path": "06.jpg",
+    "thumbnail": "06-thumbnail.jpg",
+    "intro": {
+      "path": "06-intro.png",
+      "width": 716,
+      "height": 316
+    }
+  },
+  "丧权辱国": {
+    "name": "丧权辱国",
+    "one": true,
+    "path": "07.jpg",
+    "thumbnail": "07-thumbnail.jpg",
+    "intro": {
+      "path": "07-intro.png",
+      "width": 716,
+      "height": 213
+    }
+  },
+  "香港回归": {
+    "name": "香港回归",
+    "one": true,
+    "path": "08.jpg",
+    "thumbnail": "08-thumbnail.jpg",
+    "intro": {
+      "path": "08-intro.png",
+      "width": 716,
+      "height": 213
+    }
+  },
+  "刘公岛甲午战争纪念馆外景": {
+    "name": "刘公岛甲午战争纪念馆外景",
+    "one": true,
+    "path": "01.jpg",
+    "thumbnail": "01-thumbnail.jpg",
+    "intro": {
+      "path": "01-intro.png",
+      "width": 716,
+      "height": 213
+    },
+    "links": [
+      "刘公岛甲午战争纪念馆外景",
+      "甲午战争纪念馆门外",
+      "馆内门口",
+      "问洋图强",
+      "黄海海战",
+      "马关签订",
+      "沉思历史",
+      "梁启超语录"
+    ]
+  },
+  "甲午战争纪念馆门外": {
+    "name": "甲午战争纪念馆门外",
+    "one": true,
+    "path": "02.jpg",
+    "thumbnail": "02-thumbnail.jpg"
+  },
+  "馆内门口": {
+    "name": "馆内门口",
+    "one": true,
+    "path": "03.jpg",
+    "thumbnail": "03-thumbnail.jpg",
+    "intro": {
+      "path": "03-intro.png",
+      "width": 716,
+      "height": 213
+    }
+  },
+  "问洋图强": {
+    "name": "问洋图强",
+    "one": true,
+    "path": "04.jpg",
+    "thumbnail": "04-thumbnail.jpg"
+  },
+  "黄海海战": {
+    "name": "黄海海战",
+    "one": true,
+    "path": "05.jpg",
+    "thumbnail": "05-thumbnail.jpg"
+  },
+  "马关签订": {
+    "name": "马关签订",
+    "one": true,
+    "path": "06.jpg",
+    "thumbnail": "06-thumbnail.jpg"
+  },
+  "沉思历史": {
+    "name": "沉思历史",
+    "one": true,
+    "path": "07.jpg",
+    "thumbnail": "07-thumbnail.jpg"
+  },
+  "梁启超语录": {
+    "name": "梁启超语录",
+    "one": true,
+    "path": "08.jpg",
+    "thumbnail": "08-thumbnail.jpg"
+  }
+}
