@@ -1,9 +1,9 @@
 # 甲午战争3D展厅
 
 ### 演示地址
-![http://www.wuweierwei.com/demo/babylonjs/20210806/](http://www.wuweierwei.com/demo/babylonjs/20210806/)
+[http://www.wuweierwei.com/demo/babylonjs/20210806/](http://www.wuweierwei.com/demo/babylonjs/20210806/)
 
-所用的图片资源文件只传了部份，音频、视频均未上传。
+所用的图片资源文件只传了部份，音频、视频均未上传。如确实需要，到项目中去扒吧。（俺也是一个一个往下扒的）
 
 ### 所模仿的原项目
 
