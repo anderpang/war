@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>甲午战争虚拟仿真实验教学项目</title>
+    <style>
+        html,
+        body {
+            overflow: hidden;
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+        body{
+            font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+        }
+        #renderCanvas{
+            display:block;
+            width: 100%;
+            height: 100%;
+            touch-action: none;
+            outline: none;
+        }
+        .loading{
+            position:absolute;
+            z-index:7;
+            top:0;
+            width:100%;
+            height:100%;   
+            background-color:rgba(255,255,255,.5);         
+        }
+        .sound-btn{
+            display:none;
+            position:absolute;
+            z-index:2;
+            left:20px;
+            top:20px;
+            width:60px;
+            height:40px;
+            background:rgba(51,51,51,0.7) url(data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgMTM2NSAxMDI0IiB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0iTTczOS41NTU1NTYgMTAyNGE1Ni44ODg4ODkgNTYuODg4ODg5IDAgMCAxLTI4LjQ0NDQ0NS04LjUzMzMzM0wzNTMuNTY0NDQ0IDc5Ni40NDQ0NDRINTYuODg4ODg5YTU2Ljg4ODg4OSA1Ni44ODg4ODkgMCAwIDEtNTYuODg4ODg5LTU2Ljg4ODg4OFYyODQuNDQ0NDQ0YTU2Ljg4ODg4OSA1Ni44ODg4ODkgMCAwIDEgNTYuODg4ODg5LTU2Ljg4ODg4OGgyOTYuNjc1NTU1TDcxMS4xMTExMTEgOC41MzMzMzNBNTYuODg4ODg5IDU2Ljg4ODg4OSAwIDAgMSA3OTYuNDQ0NDQ0IDU2Ljg4ODg4OXY5MTAuMjIyMjIyYTU2Ljg4ODg4OSA1Ni44ODg4ODkgMCAwIDEtNTYuODg4ODg4IDU2Ljg4ODg4OXpNMTEzLjc3Nzc3OCA2ODIuNjY2NjY3aDI1NmE1Ni44ODg4ODkgNTYuODg4ODg5IDAgMCAxIDI5Ljg2NjY2NiA4LjUzMzMzM2wyODQuNDQ0NDQ1IDE3NC4wOFYxNTguNzJsLTI4NC40NDQ0NDUgMTc0LjA4QTU2Ljg4ODg4OSA1Ni44ODg4ODkgMCAwIDEgMzY5Ljc3Nzc3OCAzNDEuMzMzMzMzSDExMy43Nzc3Nzh6TTEyMjAuMjY2NjY3IDUxMmwxMzIuNTUxMTExLTEzMi41NTExMTFhNDIuMzgyMjIyIDQyLjM4MjIyMiAwIDAgMCAwLTYwLjMwMjIyMiA0Mi45NTExMTEgNDIuOTUxMTExIDAgMCAwLTYwLjMwMjIyMiAwbC0xMzIuNTUxMTEyIDEzMi41NTExMTEtMTMyLjI2NjY2Ni0xMzIuNTUxMTExQTQyLjY2NjY2NyA0Mi42NjY2NjcgMCAxIDAgOTY3LjExMTExMSAzNzkuNDQ4ODg5TDEwOTkuNjYyMjIyIDUxMiA5NjcuMTExMTExIDY0NC41NTExMTFhNDIuOTUxMTExIDQyLjk1MTExMSAwIDAgMCAwIDYwLjMwMjIyMiA0Mi45NTExMTEgNDIuOTUxMTExIDAgMCAwIDYwLjU4NjY2NyAwbDEzMi4yNjY2NjYtMTMyLjU1MTExMSAxMzIuNTUxMTEyIDEzMi41NTExMTFhNDIuNjY2NjY3IDQyLjY2NjY2NyAwIDAgMCA2MC4zMDIyMjIgMCA0Mi4zODIyMjIgNDIuMzgyMjIyIDAgMCAwIDAtNjAuMzAyMjIyeiIgZmlsbD0iI0ZGRiI+PC9wYXRoPjwvc3ZnPg==) no-repeat 50% 50%;
+            background-size:auto 70%;
+            cursor:pointer;
+        }
+        .sound-btn.is-playing{
+            background-image:url(data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgMTM2NSAxMDI0IiB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0iTTczOS41NTU1NTYgMTAyNGE1Ni44ODg4ODkgNTYuODg4ODg5IDAgMCAxLTI4LjQ0NDQ0NS04LjUzMzMzM0wzNTMuNTY0NDQ0IDc5Ni40NDQ0NDRINTYuODg4ODg5YTU2Ljg4ODg4OSA1Ni44ODg4ODkgMCAwIDEtNTYuODg4ODg5LTU2Ljg4ODg4OFYyODQuNDQ0NDQ0YTU2Ljg4ODg4OSA1Ni44ODg4ODkgMCAwIDEgNTYuODg4ODg5LTU2Ljg4ODg4OGgyOTYuNjc1NTU1TDcxMS4xMTExMTEgOC41MzMzMzNBNTYuODg4ODg5IDU2Ljg4ODg4OSAwIDAgMSA3OTYuNDQ0NDQ0IDU2Ljg4ODg4OXY5MTAuMjIyMjIyYTU2Ljg4ODg4OSA1Ni44ODg4ODkgMCAwIDEtNTYuODg4ODg4IDU2Ljg4ODg4OXpNMTEzLjc3Nzc3OCA2ODIuNjY2NjY3aDI1NmE1Ni44ODg4ODkgNTYuODg4ODg5IDAgMCAxIDI5Ljg2NjY2NiA4LjUzMzMzM2wyODQuNDQ0NDQ1IDE3NC4wOFYxNTguNzJsLTI4NC40NDQ0NDUgMTc0LjA4QTU2Ljg4ODg4OSA1Ni44ODg4ODkgMCAwIDEgMzY5Ljc3Nzc3OCAzNDEuMzMzMzMzSDExMy43Nzc3Nzh6TTExOTQuNjY2NjY3IDg2Ni40MTc3NzhhNDIuOTUxMTExIDQyLjk1MTExMSAwIDAgMS0zMS4yODg4ODktMTMuMDg0NDQ1IDQyLjM4MjIyMiA0Mi4zODIyMjIgMCAwIDEgMC02MC4zMDIyMjIgMzk4LjIyMjIyMiAzOTguMjIyMjIyIDAgMCAwIDAtNTYzLjJBNDIuNjY2NjY3IDQyLjY2NjY2NyAwIDAgMSAxMjIzLjExMTExMSAxNzAuNjY2NjY3YTQ4My41NTU1NTYgNDgzLjU1NTU1NiAwIDAgMSAwIDY4Mi42NjY2NjYgNDIuOTUxMTExIDQyLjk1MTExMSAwIDAgMS0yOC40NDQ0NDQgMTMuMDg0NDQ1eiIgZmlsbD0iI0ZGRiIgcC1pZD0iNDY0NCI+PC9wYXRoPjxwYXRoIGQ9Ik0xMDUyLjQ0NDQ0NCA3MjUuNjE3Nzc4YTQyLjk1MTExMSA0Mi45NTExMTEgMCAwIDEtMjguNDQ0NDQ0LTEyLjUxNTU1NkE0Mi4zODIyMjIgNDIuMzgyMjIyIDAgMCAxIDEwMjQgNjU0LjIyMjIyMmExOTkuMTExMTExIDE5OS4xMTExMTEgMCAwIDAgMC0yODEuNiA0Mi42NjY2NjcgNDIuNjY2NjY3IDAgMCAxIDYwLjMwMjIyMi02MC4zMDIyMjIgMjg0LjQ0NDQ0NCAyODQuNDQ0NDQ0IDAgMCAxIDAgNDAyLjIwNDQ0NCA0Mi45NTExMTEgNDIuOTUxMTExIDAgMCAxLTMxLjg1Nzc3OCAxMS4wOTMzMzR6IiBmaWxsPSIjRkZGIj48L3BhdGg+PC9zdmc+);
+        }
+        .loading:before{
+            position:absolute;
+            content:"";
+            width:60px;
+            height:60px;
+            left:0;
+            right:0;
+            top:0;
+            bottom:0;
+            margin:auto;
+            background:url(statics/assets/loading.svg) no-repeat 0 0;
+            background-size:contain;
+            animation: rotate 1s linear infinite;
+        }
+
+        .loading-ui{
+            position:fixed;
+            top:0;
+            width:100%;
+            height:100%;
+            z-index:8;
+            background:#FFF url(statics/assets/loading-bg.png) no-repeat 50% 0;
+            background-size:cover;
+        }
+
+        .progress-bar{
+            position:absolute;
+            left:25%;
+            bottom:50px;
+            width:50%;
+            height:25px;
+            padding:5px;
+            box-sizing: border-box;
+            border:1px solid #333;
+            border-radius:20px;
+        }
+        .progress{
+            position:relative;
+            height:100%;
+            width:0;
+            border-radius:10px;
+            background: -webkit-repeating-linear-gradient(45deg,#883a3ecc,#883a3ecc 15px,#d9534f 15px,#d9534f 30px);
+            background: repeating-linear-gradient(45deg,#883a3ecc,#883a3ecc 15px,#d9534f 15px,#d9534f 30px);
+            background-size:45px auto;
+            /* transition:width 2s; */
+            animation: progress-ani 0.5s linear infinite;
+            will-change: background-position;
+        }
+        .progress>span{
+            position:absolute;
+            bottom:100%;
+            right:0;
+            padding:5px;
+            font-size:12px;
+            color:#FFF;
+            background-color:#333;
+            border-radius:3px;
+            margin-bottom:10px;
+            transform:translateX(20px);
+        }
+        .progress>span:before{
+            position:absolute;
+            content:"";
+            top:100%;
+            left:1em;
+            height:0;
+            border:5px solid transparent;
+            border-top-color:#333;
+        }
+        @keyframes rotate{
+            100%{transform:rotate(360deg);}
+        }
+
+        @keyframes progress-ani {
+            0%{background-position:0 0;}
+            100%{background-position:45px 0;}
+        }
+    </style>
+</head>
+<body>
+    <canvas id="renderCanvas" touch-action="none"></canvas>
+    <span class="sound-btn"></span>
+    <div class="loading-ui">
+        <div class="progress-bar">
+            <div class="progress">
+                <span>0%</span>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.staticfile.org/babylonjs/4.2.0/babylon.min.js"></script>
+    <!-- <script src="statics/libs/babylon.gui.min.js"></script> -->
+</body>
+</html>
