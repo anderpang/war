@@ -11,7 +11,7 @@ module.exports=function(env,argv){
           entry:"./src/main.ts",
           output:{
               path:path.resolve(__dirname,"dist"),
-              filename:"js/[name].[hash:6].js"
+              filename:"js/[name].[fullhash:6].js"
           },
           module:{
               rules:[
@@ -36,7 +36,7 @@ module.exports=function(env,argv){
               new CopyPlugin({
                 patterns: [
                   { from: "statics", to: "./statics" },
-                  {from: "src/.manifest",to: "./.manifest"}
+                //   {from: "src/.manifest",to: "./.manifest"}
                 ],
               }),
           ],
